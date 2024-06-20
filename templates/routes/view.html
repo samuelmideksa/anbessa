@@ -1,0 +1,46 @@
+{% extends 'management-base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Create Destination
+{% endblock %}
+
+{% block content %}
+    <div class="container text-center my-2">
+        <h3>Routes</h3>
+    </div>
+    
+    <div class="container text-end">
+        <a href="{% url 'create_route' %}">Add</a>
+    </div>
+    <div
+        class="table-responsive container"
+    >
+        <table
+            class="table table-primary"
+        >
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Origin</th>
+                <th scope="col">Destination</th>
+                <th scope="col">Stops</th>
+                <th scope="col">Travel time</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for route in routes %}
+                <tr class="">
+                    <td>{{ route.id }}</td>
+                    <td>{{ route.origin }}</td>
+                    <td>{{ route.destination }}</td>
+                    <td>{{ route.stops }}</td>
+                    <td>{{ route.travel_time }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

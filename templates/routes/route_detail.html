@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Route Detail</h1>
+  <h2>{{ route.origin }} to {{ route.destination }}</h2>
+  <p><strong>Stops:</strong> {{ route.stops }}</p>
+  <p><strong>Travel Time:</strong> {{ route.travel_time }}</p>
+  <a href="{% url 'purchase_ticket' route.id %}">Purchase Ticket</a>
+{% endblock %}

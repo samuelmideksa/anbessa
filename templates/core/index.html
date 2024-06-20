@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1>Welcome to Anbessa Bus</h1>
+                <p>Your reliable partner in transportation. We provide efficient and affordable bus services to make
+                    your commute comfortable and convenient.</p>
+                <p>Our services include:</p>
+                <ul>
+                    <li>City Bus Services</li>
+                    <li>Intercity Bus Services</li>
+                    <li>Special Charter Services</li>
+                    <li>Subscription and Pass Management</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <div id="announcementsCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                {% for announcement in announcements %}
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ announcement.title }}</h5>
+                                <p class="card-text">{{ announcement.content }}</p>
+                                <div class="carousel-images">
+                                    {% for image in announcement.images.all %}
+                                        <img src="{{ image.url }}" class="d-block w-100" alt="...">
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#announcementsCarousel"
+                    data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#announcementsCarousel"
+                    data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+{% endblock %}

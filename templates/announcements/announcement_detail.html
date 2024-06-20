@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>{{ announcement.title }}</h2>
+    <p>{{ announcement.content }}</p>
+
+    <h3>Images</h3>
+    <div class="row">
+        {% for image in images %}
+            <div class="col-md-3">
+                <img src="{{ image.image.url }}" class="img-fluid" alt="Announcement Image">
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

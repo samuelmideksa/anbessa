@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Ticket Details</h1>
+    <p>Route: {{ ticket.route.origin }}  to  {{ ticket.route.destination }}</p>
+    <p>Type: {{ ticket.ticket_type }}</p>
+    <p>Price: ETB{{ ticket.price }}</p>
+    <!-- Add other details as needed -->
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Subscription Details</h1>
+    <p>Pass Type: {{ subscription.pass_type.name }}</p>
+    <p>Start Date: {{ subscription.start_date }}</p>
+    <p>End Date: {{ subscription.end_date }}</p>
+    <p>Price: {{ subscription.pass_type.price }}</p>
+{% endblock %}

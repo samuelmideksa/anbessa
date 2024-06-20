@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>My Tickets</h1>
+<ul>
+    {% for ticket in tickets %}
+        <li>
+            <a href="{% url 'ticket_detail' ticket.id %}">Ticket for route: {{ ticket.route.origin }} to {{ ticket.route.destination }} - {{ ticket.ticket_type }}</a>
+        </li>
+    {% empty %}
+        <li>No tickets found.</li>
+    {% endfor %}
+</ul>
+
+{% if subscription %}
+    <h2>My Subscription</h2>
+    <div>
+        <a href="{% url 'subscription_detail' %}">
+            {{ subscription.pass_type.name }} - Expires on {{ subscription.end_date }}
+        </a>
+    </div>
+{% else %}
+    <h2>No Subscription Found</h2>
+    <div>
+        <a href="{% url 'subscribe' %}">Purchase a Subscription</a>
+    </div>
+{% endif %}
+{% endblock %}

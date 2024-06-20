@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>All Announcements</h1>
+    <div class="list-group">
+        {% for announcement in announcements %}
+            <a href="{% url 'announcement_detail' announcement.id %}" class="list-group-item list-group-item-action">
+                <h5 class="mb-1">{{ announcement.title }}</h5>
+                <small>Published on {{ announcement.created_at }}</small>
+                <p class="mb-1">{{ announcement.content }}</p>
+            </a>
+        {% empty %}
+            <p>No announcements available.</p>
+        {% endfor %}
+    </div>
+{% endblock %}
