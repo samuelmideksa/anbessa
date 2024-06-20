@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Announcement, Image
 from .forms import AnnouncementForm, ImageFormSet
@@ -10,18 +10,15 @@ def create_announcement(request):
         return redirect('home')  # Redirect non-admin users
 
     if request.method == 'POST':
-        announcement_form = AnnouncementForm(request.POST, request.FILES)
+        announcement_form = AnnouncementForm(request.POST)
         image_formset = ImageFormSet(request.POST, request.FILES)
 
         if announcement_form.is_valid() and image_formset.is_valid():
             announcement = announcement_form.save(commit=False)
             announcement.created_by = request.user
             announcement.save()
-
-            for form in image_formset.cleaned_data:
-                if form:
-                    image = form['image']
-                    Image.objects.create(announcement=announcement, image=image)
+            image_formset.instance = announcement
+            image_formset.save()
 
             return redirect('announcement_detail', announcement_id=announcement.id)
     else:
@@ -37,7 +34,7 @@ def create_announcement(request):
 
 @login_required
 def announcement_detail(request, announcement_id):
-    announcement = Announcement.objects.get(id=announcement_id)
+    announcement = get_object_or_404(Announcement, id=announcement_id)
     images = announcement.images.all()
     return render(request, 'announcements/announcement_detail.html', {'announcement': announcement, 'images': images})
 

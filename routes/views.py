@@ -15,7 +15,7 @@ def isScheduler(user):
 
 def view(request):
     routes = Route.objects.all()
-    return render(request, 'routes/view.html')
+    return render(request, 'routes/view.html', {'routes': routes})
 
 
 @login_required

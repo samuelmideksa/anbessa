@@ -10,7 +10,7 @@
     <div class="container text-center my-2">
         <h3>Routes</h3>
     </div>
-    
+
     <div class="container text-end">
         <a href="{% url 'create_route' %}">Add</a>
     </div>
@@ -27,6 +27,7 @@
                 <th scope="col">Destination</th>
                 <th scope="col">Stops</th>
                 <th scope="col">Travel time</th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -37,6 +38,13 @@
                     <td>{{ route.destination }}</td>
                     <td>{{ route.stops }}</td>
                     <td>{{ route.travel_time }}</td>
+                    <td>
+                        <a class="btn btn-warning"
+                           href="{% url 'update_route' route.id route.origin|slugify|add:'-'|add:route.destination|slugify %}"
+                           role="button">
+                            Edit
+                        </a>
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>
